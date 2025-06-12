@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZRI Strategies | Strategic Fundraising & Leadership</title>
+    <meta name="description" content="ZRI Strategies empowers social impact organizations to scale, innovate, and lead meaningful change through strategic fundraising, leadership development, and transformative partnerships.">
+    
+    <!-- Google Fonts: Poppins for headings, Source Sans Pro for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* --- 
+        HOLISTIC REDESIGN: AIRY & LIGHT THEME
+        * Palette: Slate Blue, Light Grays, and Clean White
+        * Typography: Modern (Poppins & Source Sans Pro)
+        * Layout: Open, spacious, with generous whitespace
+        * Goal: Professional, accessible, and "airy" feel
+        --- */
+
+        /* --- GLOBAL STYLES & VARIABLES --- */
+        :root {
+            --primary-text-color: #2d3748; /* Dark Slate Gray for text */
+            --accent-color: #4A90E2;      /* Professional, soft Blue */
+            --accent-hover-color: #357ABD;
+            --background-color: #FFFFFF;
+            --section-bg-color: #f7fafc; /* Very light gray for section backgrounds */
+            --border-color: #e2e8f0;
+            --heading-font: 'Poppins', sans-serif;
+            --body-font: 'Source Sans Pro', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--body-font);
+            margin: 0;
+            padding-top: 80px; /* Increased padding for airy navbar */
+            color: var(--primary-text-color);
+            background-color: var(--section-bg-color); /* Set base background to light gray for seamless transitions */
+            line-height: 1.7;
+            font-size: 17px; /* Slightly larger base font size for readability */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--heading-font);
+            font-weight: 600;
+            margin-top: 0;
+            color: var(--primary-text-color);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px; /* Wider container for more space */
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: -1rem auto 3.5rem auto;
+            font-size: 1.2rem;
+            color: #718096; /* Lighter text for subtitles */
+        }
+
+        /* --- NAVIGATION BAR --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            height: 80px; /* Taller navbar */
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        .nav-logo {
+            font-family: var(--heading-font);
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--primary-text-color);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 40px;
+        }
+
+        .nav-link {
+            font-family: var(--heading-font);
+            text-decoration: none;
+            color: var(--primary-text-color);
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent-color);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .hamburger { display: none; }
+        .bar { display: none; }
+
+        /* --- HERO & FULL-SCREEN SECTIONS --- */
+        .hero-section, #about, #services, #insights {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: calc(100vh - 80px); /* Fill screen height minus navbar */
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section {
+             background-color: var(--section-bg-color);
+             text-align: center;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .parallax-shape {
+            position: absolute;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            transition: transform 0.2s ease-out;
+        }
+        
+        .shape1 { width: 200px; height: 200px; top: 15%; left: 10%; opacity: 0.4; filter: blur(60px); }
+        .shape2 { width: 80px; height: 80px; top: 25%; left: 80%; opacity: 0.5; filter: blur(40px); }
+        .shape3 { width: 150px; height: 150px; top: 70%; left: 20%; opacity: 0.45; filter: blur(70px); }
+        .shape4 { width: 120px; height: 120px; top: 80%; left: 85%; opacity: 0.3; filter: blur(50px); }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+            margin: 0 auto;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Added for scroll parallax */
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.4rem;
+            max-width: 750px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .cta-button {
+            font-family: var(--heading-font);
+            background-color: var(--accent-color);
+            color: var(--background-color);
+            padding: 18px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, transform 0.3s;
+            display: inline-block;
+            box-shadow: 0 4px 14px 0 rgba(0, 118, 255, 0.39);
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-hover-color);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px 0 rgba(0, 118, 255, 0.23);
+        }
+
+        /* --- ABOUT SECTION --- */
+        #about {
+            background-color: var(--background-color);
+        }
+        
+        #about .about-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        #about .about-image img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 10px 30px -10px rgba(45, 55, 72, 0.3);
+        }
+
+        #about .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* --- SERVICES & INSIGHTS CARD LAYOUT --- */
+        #services, #insights {
+             background-color: var(--section-bg-color);
+        }
+        
+        #contact {
+            background-color: var(--background-color);
+            padding: 100px 20px;
+        }
+
+        .card-container {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: 1fr;
+        }
+
+        .card {
+            background: var(--background-color);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: var(--accent-color);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary-text-color);
+        }
+        
+        .card p {
+            flex-grow: 1;
+            font-size: 1rem;
+            color: #4a5568;
+        }
+
+        .card i {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin: 0 0 1.5rem 0;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            background-color: #eaf2ff;
+            border-radius: 10px;
+        }
+
+
+        /* --- CONTACT SECTION --- */
+        #contact .container {
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+        }
+        
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            font-family: var(--heading-font);
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            padding: 14px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .contact-button:hover {
+              background-color: var(--accent-color);
+              color: white;
+              transform: translateY(-2px);
+        }
+
+        .contact-button i {
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            margin-top: 3rem;
+        }
+
+        .social-links a {
+            color: #a0aec0;
+            font-size: 1.8rem;
+            margin: 0 1.2rem;
+            transition: color 0.3s, transform 0.3s;
+            display: inline-block;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #1a202c;
+            color: #a0aec0;
+            font-size: 1rem;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 992px) {
+            #about .about-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                text-align: center;
+            }
+            
+            #about .about-image {
+                margin: 0 auto;
+            }
+            
+            #about .about-text {
+                 text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body { padding-top: 70px; }
+            section, .hero-section, #about, #services, #insights { 
+                scroll-margin-top: 70px; 
+                padding: 60px 15px; 
+                min-height: calc(100vh - 70px);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            #about .about-container { /* Added rule to fix mobile image overlap */
+                padding-top: 40px;
+            }
+            .navbar { height: 70px; padding: 0 20px; }
+            .nav-menu {
+                position: fixed; left: -100%; top: 70px;
+                flex-direction: column; background-color: white;
+                width: 100%; text-align: center; transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 20px 0; gap: 0;
+            }
+            .nav-menu.active { left: 0; }
+            .nav-item { margin: 1rem 0; }
+            .hamburger { display: block; cursor: pointer; }
+            .bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: all 0.3s ease-in-out; background-color: var(--primary-text-color); border-radius: 2px;}
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+            h2 { font-size: 2.2rem; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content .subtitle { font-size: 1.1rem; }
+            .contact-info { flex-direction: column; align-items: center; }
+            #contact { min-height: auto; } /* Let contact section be natural height on mobile */
+        }
+        
+        @media (min-width: 600px) {
+            .card-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .card-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="#hero" class="nav-logo">ZRI STRATEGIES</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#insights" class="nav-link">Insights</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="parallax-bg">
+                <div class="parallax-shape shape1" data-speed="-2"></div>
+                <div class="parallax-shape shape2" data-speed="5"></div>
+                <div class="parallax-shape shape3" data-speed="2"></div>
+                <div class="parallax-shape shape4" data-speed="-5"></div>
+            </div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Turning Bold Visions into Actionable Change</h1>
+                    <p class="subtitle">Strategic counsel for social impact organizations ready to build capacity, drive growth, and deliver sustainable impact.</p>
+                    <a href="#contact" class="cta-button">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="container">
+                <div class="about-container">
+                    <div class="about-image">
+                        <img src="https://images.pexels.com/photos/4101143/pexels-photo-4101143.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="A professional woman in a modern office environment, representing Zeenia Irani.">
+                    </div>
+                    <div class="about-text">
+                        <h2>About ZRI Strategies</h2>
+                        <p><strong>Our mission is to empower organizations to scale, innovate, and lead meaningful social change.</strong> By combining innovative thinking with data-driven insight, we help you reimagine potential, build capacity, and deliver sustainable, lasting impact.</p>
+                        <p>ZRI Strategies was founded by <strong>Zeenia Irani</strong>, a strategic leader with a track record of mobilizing millions in philanthropic and investment capital. Her expertise is built on leadership roles at FINCA International, Mercy Corps, and the United Nations Foundation. With an MBA from UC Berkeley's Haas School of Business, Zeenia brings a rigorous, cross-sector approach to solving the world's most pressing challenges.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services">
+            <div class="container">
+                <h2>Our Services</h2>
+                <p class="section-subtitle">We provide tailored advisory services to help your organization thrive. Our expertise spans fundraising, partnerships, and leadership.</p>
+                <div class="card-container">
+                    <div class="card">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <h3>Strategic Fundraising</h3>
+                        <p>We design and implement comprehensive strategies that secure diverse revenue streams and build lasting donor relationships.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fa-solid fa-building-user"></i>
+                        <h3>Corporate Engagement</h3>
+                        <p>Develop authentic, mutually beneficial partnerships with corporations through strategic alignment and workplace giving initiatives.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fa-solid fa-pen-nib"></i>
+                        <h3>Grant Writing</h3>
+                        <p>From research to submission, we offer expert grant development, crafting compelling proposals that align with funder priorities.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fa-solid fa-people-roof"></i>
+                        <h3>Leadership Development</h3>
+                        <p>Customized coaching for executive leaders and emerging talent to help them navigate challenges and lead with confidence.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Insights Section -->
+        <section id="insights">
+            <div class="container">
+                <h2>Fundraising Fundamentals</h2>
+                 <p class="section-subtitle">Strengthen your foundation with expert guidance on essential fundraising areas. We offer practical, actionable insights that set you up for success.</p>
+                <div class="card-container">
+                    <div class="card">
+                        <i class="fa-solid fa-people-arrows"></i>
+                        <h3>Moves Management</h3>
+                        <p>Learn to guide prospective donors from identification to solicitation with a systematic, relationship-focused approach.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fa-solid fa-hand-holding-hand"></i>
+                        <h3>Solicitation 101</h3>
+                        <p>Master the art and science of making the ask, from preparation to follow-up, to confidently secure support.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fa-solid fa-users-viewfinder"></i>
+                        <h3>Board Development</h3>
+                        <p>Empower your board to become a fundraising powerhouse and a key strategic asset for your organization.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <h3>Event Planning</h3>
+                        <p>Host engagement-driven events that deepen relationships, broaden your network, and drive meaningful financial support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container">
+                <h2>Let's Connect</h2>
+                <p class="section-subtitle">Ready to drive transformative growth? Reach out to discuss how we can partner.</p>
+                <div class="contact-info">
+                    <a href="mailto:zristrategies@gmail.com" class="contact-button"><i class="fas fa-envelope"></i> zristrategies@gmail.com</a>
+                    <a href="tel:1-818-333-6021" class="contact-button"><i class="fas fa-phone"></i> (818) 333-6021</a>
+                </div>
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn Profile" title="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 ZRI Strategies. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // --- Mobile Hamburger Menu ---
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }));
+        
+        // --- Parallax Effects ---
+        function handleParallax() {
+            // Mouse Move Parallax for Shapes
+            const mouseMoveHandler = function(e) {
+                const shapes = document.querySelectorAll('.parallax-shape');
+                const speedBase = 0.01;
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                const mouseX = e.clientX - centerX;
+                const mouseY = e.clientY - centerY;
+                
+                shapes.forEach(shape => {
+                    const speed = shape.getAttribute('data-speed') * speedBase;
+                    const x = mouseX * speed;
+                    const y = mouseY * speed;
+                    shape.style.transform = `translate(${x}px, ${y}px)`;
+                });
+            };
+
+            // Scroll Parallax for Hero Content
+            const scrollHandler = function() {
+                const heroContent = document.querySelector('.hero-content');
+                let offset = window.pageYOffset;
+                if (heroContent) {
+                   heroContent.style.transform = `translateY(${offset * 0.3}px)`;
+                }
+            };
+            
+            // Add listeners
+            document.addEventListener("mousemove", mouseMoveHandler);
+            window.addEventListener('scroll', scrollHandler);
+        }
+
+        handleParallax();
+
+    </script>
+</body>
+</html>
