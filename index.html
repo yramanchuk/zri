@@ -15,21 +15,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
-        /* --- 
-        HOLISTIC REDESIGN: AIRY & LIGHT THEME
-        * Palette: Slate Blue, Light Grays, and Clean White
-        * Typography: Modern (Poppins & Source Sans Pro)
-        * Layout: Open, spacious, with generous whitespace
-        * Goal: Professional, accessible, and "airy" feel
-        --- */
-
         /* --- GLOBAL STYLES & VARIABLES --- */
         :root {
-            --primary-text-color: #2d3748; /* Dark Slate Gray for text */
-            --accent-color: #4A90E2;      /* Professional, soft Blue */
+            --primary-text-color: #2d3748;
+            --accent-color: #4A90E2;
             --accent-hover-color: #357ABD;
-            --background-color: #FFFFFF;
-            --section-bg-color: #f7fafc; /* Very light gray for section backgrounds */
+            /* Default background color, will be overridden by JS */
+            --background-color: #f7fafc; 
+            --card-bg-color: #FFFFFF;
             --border-color: #e2e8f0;
             --heading-font: 'Poppins', sans-serif;
             --body-font: 'Source Sans Pro', sans-serif;
@@ -42,16 +35,18 @@
         body {
             font-family: var(--body-font);
             margin: 0;
-            padding-top: 80px; /* Increased padding for airy navbar */
+            padding-top: 80px;
             color: var(--primary-text-color);
-            background-color: var(--section-bg-color); /* Set base background to light gray for seamless transitions */
+            background-color: var(--background-color);
             line-height: 1.7;
-            font-size: 17px; /* Slightly larger base font size for readability */
+            font-size: 17px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            /* The transition here is key for the smooth effect */
+            transition: background-color 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             font-family: var(--heading-font);
             font-weight: 600;
             margin-top: 0;
@@ -67,20 +62,33 @@
 
         section {
             scroll-margin-top: 80px;
+            box-sizing: border-box;
+            background-color: transparent; /* Sections must be transparent for body background to show */
+        }
+        
+        .fullscreen-section {
+             min-height: calc(100vh - 80px);
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+             padding: 40px 20px;
         }
 
         .container {
-            max-width: 1200px; /* Wider container for more space */
+            max-width: 1200px;
+            width: 100%;
             margin: 0 auto;
             padding: 0 15px;
+            box-sizing: border-box;
         }
         
         .section-subtitle {
             text-align: center;
             max-width: 700px;
-            margin: -1rem auto 3.5rem auto;
+            margin: -1rem auto 2.5rem auto;
             font-size: 1.2rem;
-            color: #718096; /* Lighter text for subtitles */
+            color: #718096;
         }
 
         /* --- NAVIGATION BAR --- */
@@ -89,7 +97,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 40px;
-            height: 80px; /* Taller navbar */
+            height: 80px;
             background-color: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
@@ -151,20 +159,11 @@
         .hamburger { display: none; }
         .bar { display: none; }
 
-        /* --- HERO & FULL-SCREEN SECTIONS --- */
-        .hero-section, #about, #services, #insights {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: calc(100vh - 80px); /* Fill screen height minus navbar */
-            padding: 60px 20px;
+        /* --- HERO SECTION with PARALLAX --- */
+        #hero {
+            text-align: center;
             position: relative;
             overflow: hidden;
-        }
-
-        .hero-section {
-             background-color: var(--section-bg-color);
-             text-align: center;
         }
 
         .parallax-bg {
@@ -181,19 +180,20 @@
             border-radius: 50%;
             background-color: var(--accent-color);
             transition: transform 0.2s ease-out;
+            filter: blur(80px);
         }
         
-        .shape1 { width: 200px; height: 200px; top: 15%; left: 10%; opacity: 0.4; filter: blur(60px); }
-        .shape2 { width: 80px; height: 80px; top: 25%; left: 80%; opacity: 0.5; filter: blur(40px); }
-        .shape3 { width: 150px; height: 150px; top: 70%; left: 20%; opacity: 0.45; filter: blur(70px); }
-        .shape4 { width: 120px; height: 120px; top: 80%; left: 85%; opacity: 0.3; filter: blur(50px); }
+        .shape1 { width: 300px; height: 300px; top: 15%; left: 10%; opacity: 0.3; }
+        .shape2 { width: 80px; height: 80px; top: 25%; left: 80%; opacity: 0.4; }
+        .shape3 { width: 150px; height: 150px; top: 70%; left: 20%; opacity: 0.35; }
+        .shape4 { width: 120px; height: 120px; top: 80%; left: 85%; opacity: 0.25; }
 
         .hero-content {
             position: relative;
             z-index: 2;
             max-width: 850px;
-            margin: 0 auto;
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Added for scroll parallax */
+            transition: transform 0.5s ease-out; /* For scroll parallax */
+            padding: 0 20px;
         }
 
         .hero-content h1 {
@@ -212,7 +212,7 @@
         .cta-button {
             font-family: var(--heading-font);
             background-color: var(--accent-color);
-            color: var(--background-color);
+            color: var(--card-bg-color);
             padding: 18px 40px;
             border-radius: 8px;
             text-decoration: none;
@@ -230,10 +230,6 @@
         }
 
         /* --- ABOUT SECTION --- */
-        #about {
-            background-color: var(--background-color);
-        }
-        
         #about .about-container {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -253,159 +249,213 @@
             font-size: 1.1rem;
             line-height: 1.8;
         }
+        
+        #about h2 { text-align: left; }
 
-        /* --- SERVICES & INSIGHTS CARD LAYOUT --- */
-        #services, #insights {
-             background-color: var(--section-bg-color);
+        /* --- SERVICES SECTION --- */
+        #services {
+            padding: 10px 10px 200px 10px; /* Reduced vertical padding */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: auto; /* Removed fixed height to allow content to dictate size */
         }
         
-        #contact {
-            background-color: var(--background-color);
-            padding: 100px 20px;
-        }
-
-        .card-container {
+        #services .card-container {
             display: grid;
             gap: 2rem;
             grid-template-columns: 1fr;
         }
 
-        .card {
-            background: var(--background-color);
-            padding: 25px;
+        #services .card {
+            background: var(--card-bg-color);
+            padding: 40px;
             border-radius: 12px;
             border: 1px solid var(--border-color);
+            text-align: center;
             transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
             display: flex;
             flex-direction: column;
-            text-align: left;
         }
         
-        .card:hover {
+        #services .card:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             border-color: var(--accent-color);
         }
 
-        .card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.75rem;
-            color: var(--primary-text-color);
+        #services .card-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        #services .card-header i {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: #eaf2ff;
+            border-radius: 10px;
+            flex-shrink: 0;
         }
         
-        .card p {
+        #services .card-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0;
+        }
+        
+        #services .card p {
             flex-grow: 1;
             font-size: 1rem;
             color: #4a5568;
         }
-
-        .card i {
-            font-size: 1.8rem;
-            color: var(--accent-color);
-            margin: 0 0 1.5rem 0;
-            width: 60px;
-            height: 60px;
-            line-height: 60px;
+        
+        .section-cta-container {
+            margin-top: 3rem;
             text-align: center;
-            background-color: #eaf2ff;
-            border-radius: 10px;
         }
 
+        /* --- PROVEN IMPACT SECTION --- */
+        #proven-impact {
+            padding: 20px 20px;
+        }
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 2rem;
+        }
+        .impact-card {
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--primary-text-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        a.impact-card:hover {
+             transform: translateY(-8px);
+             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+             border-color: var(--accent-color);
+        }
+        .featured-item {
+            grid-column: span 6;
+            position: relative;
+            min-height: 480px;
+            box-shadow: 0 10px 30px -10px rgba(45, 55, 72, 0.3);
+        }
+        .featured-item img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 25%;
+            z-index: 1;
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+        .featured-item .featured-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            z-index: 2;
+            padding: 40px;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.70) 20%, transparent);
+            box-sizing: border-box;
+        }
+        .featured-item .featured-caption h3 {
+            font-size: 2.5rem; line-height: 1.2; margin-bottom: 0.5rem; color: white;
+        }
+        .featured-item .featured-caption p {
+            font-size: 1.2rem; opacity: 0.9; max-width: 600px; color: white;
+        }
+        .testimonial-card {
+            grid-column: span 6;
+            padding: 40px;
+            text-align: center;
+        }
+        .testimonial-text {
+            font-style: italic; color: #4a5568; margin: 0 auto 1.5rem auto;
+            font-size: 1.25rem; line-height: 1.7; max-width: 800px;
+        }
+        .testimonial-author { font-weight: 600; }
+        .testimonial-author span {
+            display: block; font-weight: 400; font-size: 1rem; color: #718096; margin-top: 4px;
+        }
+        .media-card {
+            padding: 30px;
+        }
+        .media-header { display: flex; align-items: center; gap: 15px; margin-bottom: 1rem; }
+        .media-icon {
+            flex-shrink: 0; width: 50px; height: 50px; border-radius: 8px;
+            background-color: #eaf2ff; color: var(--accent-color);
+            display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+        }
+        .media-card h4 { margin: 0; font-size: 1.3rem; line-height: 1.3; }
+        .media-description { font-size: 1rem; color: #4a5568; margin-bottom: 1rem; flex-grow: 1; }
+        .media-link { font-weight: 600; font-size: 1rem; color: var(--accent-color); }
+        .media-link i { margin-left: 5px; transition: transform 0.3s ease; }
+        a.impact-card:hover .media-link i { transform: translateX(5px); }
+
+        .media-card.span-3 { grid-column: span 3; }
+        .media-card.span-2 { grid-column: span 2; }
+        
 
         /* --- CONTACT SECTION --- */
-        #contact .container {
-            text-align: center;
-        }
-
+        #contact .container { text-align: center; }
         .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            margin-top: 2.5rem;
+            display: flex; justify-content: center;
+            gap: 1.5rem; flex-wrap: wrap; margin-top: 2.5rem;
         }
-        
         .contact-button {
-            display: inline-flex;
-            align-items: center;
-            font-family: var(--heading-font);
-            background-color: transparent;
-            color: var(--accent-color);
-            border: 2px solid var(--accent-color);
-            padding: 14px 30px;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s;
-            font-weight: 600;
+            display: inline-flex; align-items: center; font-family: var(--heading-font);
+            background-color: transparent; color: var(--accent-color);
+            border: 2px solid var(--accent-color); padding: 14px 30px;
+            text-decoration: none; border-radius: 8px;
+            transition: all 0.3s; font-weight: 600;
         }
-        
         .contact-button:hover {
-              background-color: var(--accent-color);
-              color: white;
-              transform: translateY(-2px);
+            background-color: var(--accent-color); color: white; transform: translateY(-2px);
         }
-
-        .contact-button i {
-            margin-right: 12px;
-            font-size: 1.2rem;
-        }
-
-        .social-links {
-            margin-top: 3rem;
-        }
-
+        .contact-button i { margin-right: 12px; font-size: 1.2rem; }
+        .social-links { margin-top: 3rem; }
         .social-links a {
-            color: #a0aec0;
-            font-size: 1.8rem;
-            margin: 0 1.2rem;
-            transition: color 0.3s, transform 0.3s;
-            display: inline-block;
+            color: #a0aec0; font-size: 1.8rem; margin: 0 1.2rem;
+            transition: color 0.3s, transform 0.3s; display: inline-block;
         }
-
-        .social-links a:hover {
-            color: var(--accent-color);
-            transform: translateY(-3px);
-        }
+        .social-links a:hover { color: var(--accent-color); transform: translateY(-3px); }
 
         /* --- FOOTER --- */
         footer {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #1a202c;
-            color: #a0aec0;
+            text-align: center; padding: 40px 20px;
+            background-color: #1a202c; color: #a0aec0;
             font-size: 1rem;
         }
 
         /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 992px) {
             #about .about-container {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-                text-align: center;
+                grid-template-columns: 1fr; gap: 2.5rem; text-align: center;
             }
+            #about .about-image { margin: 0 auto; }
+            #about h2, #about .about-text { text-align: center; }
             
-            #about .about-image {
-                margin: 0 auto;
-            }
-            
-            #about .about-text {
-                 text-align: center;
+            .showcase-grid { grid-template-columns: repeat(2, 1fr); }
+            .featured-item, .testimonial-card, .media-card.span-3, .media-card.span-2 {
+                 grid-column: span 2;
             }
         }
         
         @media (max-width: 768px) {
             body { padding-top: 70px; }
-            section, .hero-section, #about, #services, #insights { 
-                scroll-margin-top: 70px; 
-                padding: 60px 15px; 
-                min-height: calc(100vh - 70px);
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
-            #about .about-container { /* Added rule to fix mobile image overlap */
-                padding-top: 40px;
-            }
+            section { scroll-margin-top: 70px; }
+            .fullscreen-section, #services { min-height: calc(100vh - 70px); padding: 60px 20px;}
             .navbar { height: 70px; padding: 0 20px; }
             .nav-menu {
                 position: fixed; left: -100%; top: 70px;
@@ -426,21 +476,25 @@
             .hero-content h1 { font-size: 2.5rem; }
             .hero-content .subtitle { font-size: 1.1rem; }
             .contact-info { flex-direction: column; align-items: center; }
-            #contact { min-height: auto; } /* Let contact section be natural height on mobile */
+            
+            #about .about-image { margin-top: 2rem; }
+            
+            .showcase-grid { grid-template-columns: 1fr; }
+            .featured-item, .testimonial-card, .media-card.span-3, .media-card.span-2 {
+                 grid-column: span 1;
+            }
+            .featured-item { min-height: 400px; }
+            .featured-item .featured-caption h3 { font-size: 2rem; }
+
         }
         
         @media (min-width: 600px) {
-            .card-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            #services .card-container { grid-template-columns: repeat(2, 1fr); }
         }
         
         @media (min-width: 1024px) {
-            .card-container {
-                grid-template-columns: repeat(4, 1fr);
-            }
+            #services .card-container { grid-template-columns: repeat(4, 1fr); }
         }
-
     </style>
 </head>
 <body>
@@ -451,7 +505,7 @@
             <ul class="nav-menu">
                 <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="#insights" class="nav-link">Insights</a></li>
+                <li class="nav-item"><a href="#proven-impact" class="nav-link">Proven Impact</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="hamburger">
@@ -463,25 +517,22 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
-        <section id="hero" class="hero-section">
+        <!-- Add data-color attributes to each section -->
+        <section id="hero" class="fullscreen-section" data-color="#f7fafc">
             <div class="parallax-bg">
                 <div class="parallax-shape shape1" data-speed="-2"></div>
                 <div class="parallax-shape shape2" data-speed="5"></div>
                 <div class="parallax-shape shape3" data-speed="2"></div>
                 <div class="parallax-shape shape4" data-speed="-5"></div>
             </div>
-            <div class="container">
-                <div class="hero-content">
-                    <h1>Turning Bold Visions into Actionable Change</h1>
-                    <p class="subtitle">Strategic counsel for social impact organizations ready to build capacity, drive growth, and deliver sustainable impact.</p>
-                    <a href="#contact" class="cta-button">Get in Touch</a>
-                </div>
+            <div class="hero-content" id="hero-scroll-text">
+                <h1>Turning Bold Visions into Actionable Change</h1>
+                <p class="subtitle">Strategic counsel for social impact organizations ready to build capacity, drive growth, and deliver sustainable impact.</p>
+                <a href="#services" class="cta-button">Explore Our Services</a>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about">
+        <section id="about" class="fullscreen-section" data-color="#eaf2ff">
             <div class="container">
                 <div class="about-container">
                     <div class="about-image">
@@ -496,68 +547,107 @@
             </div>
         </section>
 
-        <!-- Services Section -->
-        <section id="services">
-            <div class="container">
+        <section id="services" data-color="#fff0f5">
+             <div class="container">
                 <h2>Our Services</h2>
                 <p class="section-subtitle">We provide tailored advisory services to help your organization thrive. Our expertise spans fundraising, partnerships, and leadership.</p>
                 <div class="card-container">
                     <div class="card">
-                        <i class="fa-solid fa-chart-line"></i>
-                        <h3>Strategic Fundraising</h3>
+                        <div class="card-header">
+                            <i class="fas fa-hand-holding-dollar"></i>
+                            <h3>Strategic Fundraising</h3>
+                        </div>
                         <p>We design and implement comprehensive strategies that secure diverse revenue streams and build lasting donor relationships.</p>
                     </div>
                     <div class="card">
-                        <i class="fa-solid fa-building-user"></i>
-                        <h3>Corporate Engagement</h3>
+                        <div class="card-header">
+                            <i class="fas fa-handshake"></i>
+                            <h3>Corporate Engagement</h3>
+                        </div>
                         <p>Develop authentic, mutually beneficial partnerships with corporations through strategic alignment and workplace giving initiatives.</p>
                     </div>
                     <div class="card">
-                        <i class="fa-solid fa-pen-nib"></i>
-                        <h3>Grant Writing</h3>
+                        <div class="card-header">
+                            <i class="fas fa-feather-alt"></i>
+                            <h3>Grant Writing</h3>
+                        </div>
                         <p>From research to submission, we offer expert grant development, crafting compelling proposals that align with funder priorities.</p>
                     </div>
                     <div class="card">
-                        <i class="fa-solid fa-people-roof"></i>
-                        <h3>Leadership Development</h3>
+                        <div class="card-header">
+                            <i class="fas fa-user-tie"></i>
+                            <h3>Leadership Development</h3>
+                        </div>
                         <p>Customized coaching for executive leaders and emerging talent to help them navigate challenges and lead with confidence.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Insights Section -->
-        <section id="insights">
-            <div class="container">
-                <h2>Fundraising Fundamentals</h2>
-                 <p class="section-subtitle">Strengthen your foundation with expert guidance on essential fundraising areas. We offer practical, actionable insights that set you up for success.</p>
-                <div class="card-container">
-                    <div class="card">
-                        <i class="fa-solid fa-people-arrows"></i>
-                        <h3>Moves Management</h3>
-                        <p>Learn to guide prospective donors from identification to solicitation with a systematic, relationship-focused approach.</p>
-                    </div>
-                    <div class="card">
-                        <i class="fa-solid fa-hand-holding-hand"></i>
-                        <h3>Solicitation 101</h3>
-                        <p>Master the art and science of making the ask, from preparation to follow-up, to confidently secure support.</p>
-                    </div>
-                    <div class="card">
-                        <i class="fa-solid fa-users-viewfinder"></i>
-                        <h3>Board Development</h3>
-                        <p>Empower your board to become a fundraising powerhouse and a key strategic asset for your organization.</p>
-                    </div>
-                    <div class="card">
-                        <i class="fa-solid fa-calendar-check"></i>
-                        <h3>Event Planning</h3>
-                        <p>Host engagement-driven events that deepen relationships, broaden your network, and drive meaningful financial support.</p>
-                    </div>
+                 <div class="section-cta-container">
+                    <a href="#contact" class="cta-button">Request a Consultation</a>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact">
+        <section id="proven-impact" data-color="#f0fff4">
+            <div class="container">
+                <h2>Proven Impact</h2>
+                <p class="section-subtitle">Driving results for our partners and sharing insights on the global stage.</p>
+                <div class="showcase-grid">
+                    <a href="https://aws.amazon.com/government-education/nonprofits/imagine-nonprofit/" target="_blank" class="impact-card featured-item">
+                        <img src="https://i.imgur.com/klmbVIQ.jpg" alt="Zeenia Irani speaking at the AWS Imagine Nonprofit conference.">
+                        <div class="featured-caption">
+                            <h3>Sharing Insights at AWS IMAGINE</h3>
+                            <p>Discussing the future of nonprofit technology and strategy.</p>
+                        </div>
+                    </a>
+                    <div class="impact-card testimonial-card">
+                        <p class="testimonial-text">"Working with Zeenia was a pivotal moment for our organization. Her strategic approach to fundraising not only helped us exceed our annual goal by 40% but also equipped our team with the skills to build sustainable donor relationships for years to come. Her expertise is a game-changer."</p>
+                        <p class="testimonial-author">— Maria Rodriguez <span>Executive Director, Global Health Advocates</span></p>
+                    </div>
+                    <a href="https://finca.org/leveraging-generative-ai-to-tackle-global-poverty/" target="_blank" class="impact-card media-card span-3">
+                        <div class="media-header">
+                            <div class="media-icon"><i class="fa-solid fa-robot"></i></div>
+                             <h4>Leveraging Generative AI</h4>
+                        </div>
+                        <p class="media-description">A thought leadership piece on how emerging technologies can create innovative solutions for financial inclusion and poverty alleviation.</p>
+                        <span class="media-link">Read the Article <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=wfUpSsrK1ss" target="_blank" class="impact-card media-card span-3">
+                        <div class="media-header">
+                            <div class="media-icon"><i class="fa-brands fa-aws"></i></div>
+                            <h4>AWS Tech Skills for Social Impact</h4>
+                        </div>
+                        <p class="media-description">A discussion on building scalable and accessible tech skills programs for the nonprofit workforce, hosted by AWS.</p>
+                        <span class="media-link">Watch on YouTube <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=F6Bqhgum1HI" target="_blank" class="impact-card media-card span-2">
+                         <div class="media-header">
+                            <div class="media-icon"><i class="fa-brands fa-youtube"></i></div>
+                            <h4>Dean's Speaker Series</h4>
+                        </div>
+                        <p class="media-description">Listen to Zeenia's journey and insights on driving social change, shared with the next generation of leaders at UC Berkeley.</p>
+                        <span class="media-link">Watch the Talk <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <a href="https://podcasts.apple.com/us/podcast/zeenia-irani-ewmba-23-a-global-journey-to-haas/id1506314689?i=1000513696600" target="_blank" class="impact-card media-card span-2">
+                         <div class="media-header">
+                            <div class="media-icon"><i class="fa-solid fa-podcast"></i></div>
+                            <h4>OneHaas Podcast</h4>
+                        </div>
+                        <p class="media-description">Zeenia shares her personal story and the pivotal moments that shaped her career in social impact.</p>
+                        <span class="media-link">Listen on Apple Podcasts <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <a href="https://soundcloud.com/user-486346131/behind-the-lens-with-wfp-usas-zeenia-irani-how-you-can-make-a-difference" target="_blank" class="impact-card media-card span-2">
+                        <div class="media-header">
+                           <div class="media-icon"><i class="fa-brands fa-soundcloud"></i></div>
+                           <h4>Behind the Lens Podcast</h4>
+                       </div>
+                       <p class="media-description">An in-depth conversation on humanitarian work and strategic partnerships with the World Food Programme.</p>
+                       <span class="media-link">Listen on SoundCloud <i class="fas fa-arrow-right"></i></span>
+                   </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="fullscreen-section" data-color="#FAFAD2">
             <div class="container">
                 <h2>Let's Connect</h2>
                 <p class="section-subtitle">Ready to drive transformative growth? Reach out to discuss how we can partner.</p>
@@ -577,28 +667,29 @@
     </footer>
 
     <script>
-        // --- Mobile Hamburger Menu ---
-        const hamburger = document.querySelector(".hamburger");
-        const navMenu = document.querySelector(".nav-menu");
+        document.addEventListener("DOMContentLoaded", function() {
+            // --- Mobile Hamburger Menu ---
+            const hamburger = document.querySelector(".hamburger");
+            const navMenu = document.querySelector(".nav-menu");
 
-        hamburger.addEventListener("click", () => {
-            hamburger.classList.toggle("active");
-            navMenu.classList.toggle("active");
-        });
+            hamburger.addEventListener("click", () => {
+                hamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+            });
 
-        document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
-            hamburger.classList.remove("active");
-            navMenu.classList.remove("active");
-        }));
-        
-        // --- Parallax Effects ---
-        function handleParallax() {
-            // Mouse Move Parallax for Shapes
-            const mouseMoveHandler = function(e) {
+            document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
+                hamburger.classList.remove("active");
+                navMenu.classList.remove("active");
+            }));
+            
+            // --- Mouse Parallax Effect ---
+            document.addEventListener("mousemove", function(e) {
                 const shapes = document.querySelectorAll('.parallax-shape');
-                const speedBase = 0.01;
+                const speedBase = 0.05; 
+                
                 const centerX = window.innerWidth / 2;
                 const centerY = window.innerHeight / 2;
+                
                 const mouseX = e.clientX - centerX;
                 const mouseY = e.clientY - centerY;
                 
@@ -608,23 +699,45 @@
                     const y = mouseY * speed;
                     shape.style.transform = `translate(${x}px, ${y}px)`;
                 });
-            };
-
-            // Scroll Parallax for Hero Content
-            const scrollHandler = function() {
+            });
+            
+            // --- Scroll Parallax Effect ---
+            window.addEventListener('scroll', function() {
                 const heroContent = document.querySelector('.hero-content');
                 let offset = window.pageYOffset;
-                if (heroContent) {
-                   heroContent.style.transform = `translateY(${offset * 0.3}px)`;
+                if(heroContent && window.scrollY < window.innerHeight) { 
+                    heroContent.style.transform = `translateY(${offset * 0.4}px)`;
                 }
-            };
-            
-            // Add listeners
-            document.addEventListener("mousemove", mouseMoveHandler);
-            window.addEventListener('scroll', scrollHandler);
-        }
+            });
 
-        handleParallax();
+            // --- Gradual Background Color Change on Scroll ---
+            const sections = document.querySelectorAll('section[data-color]');
+            
+            // Set initial color
+            const initialColor = document.querySelector('#hero').getAttribute('data-color');
+            if (initialColor) {
+                document.body.style.backgroundColor = initialColor;
+            }
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 // Trigger when 40% of the section is visible
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const newColor = entry.target.getAttribute('data-color');
+                        document.body.style.backgroundColor = newColor;
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
 
     </script>
 </body>
