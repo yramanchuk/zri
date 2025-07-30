@@ -85,8 +85,8 @@
         
         .section-subtitle {
             text-align: center;
-            max-width: 700px;
-            margin: -1rem auto 2.5rem auto;
+            max-width: 900px;
+            margin: -1rem auto 3.5rem auto;
             font-size: 1.2rem;
             color: #718096;
         }
@@ -205,7 +205,6 @@
 
         .hero-content .subtitle {
             font-size: 1.4rem;
-            max-width: 750px;
             margin: 0 auto 2.5rem auto;
         }
 
@@ -230,16 +229,22 @@
         }
 
         /* --- ABOUT SECTION --- */
+        #about {
+            padding: 100px 20px;
+            display: flex;
+            align-items: center;
+        }
         #about .about-container {
             display: grid;
-            grid-template-columns: 1fr 2fr;
+            grid-template-columns: 1fr 1.5fr; /* Adjusted for better balance */
             align-items: center;
-            gap: 4rem;
+            gap: 5rem;
         }
 
         #about .about-image img {
             width: 100%;
-            max-width: 300px;
+            height: 100%;
+            max-height: 550px; /* Taller image */
             border-radius: 12px;
             object-fit: cover;
             box-shadow: 0 10px 30px -10px rgba(45, 55, 72, 0.3);
@@ -250,32 +255,49 @@
             line-height: 1.8;
         }
         
-        #about h2 { text-align: left; }
+        #about h2, #about h3 { text-align: left; }
+        
+        #about h3 {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
 
         /* --- SERVICES SECTION --- */
         #services {
-            padding: 10px 10px 200px 10px; /* Reduced vertical padding */
+            padding: 100px 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: auto; /* Removed fixed height to allow content to dictate size */
         }
         
         #services .card-container {
             display: grid;
+            grid-template-columns: repeat(6, 1fr);
             gap: 2rem;
-            grid-template-columns: 1fr;
         }
-
+        
         #services .card {
             background: var(--card-bg-color);
-            padding: 40px;
+            padding: 30px;
             border-radius: 12px;
             border: 1px solid var(--border-color);
             text-align: center;
             transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
             display: flex;
             flex-direction: column;
+        }
+        
+        #services .card:nth-child(1),
+        #services .card:nth-child(2) {
+            grid-column: span 3;
+        }
+
+        #services .card:nth-child(3),
+        #services .card:nth-child(4),
+        #services .card:nth-child(5) {
+            grid-column: span 2;
         }
         
         #services .card:hover {
@@ -316,13 +338,15 @@
         }
         
         .section-cta-container {
-            margin-top: 3rem;
+            margin-top: 3.5rem;
             text-align: center;
+            width: 100%;
+            grid-column: 1 / -1;
         }
-
+        
         /* --- PROVEN IMPACT SECTION --- */
         #proven-impact {
-            padding: 20px 20px;
+            padding: 100px 20px;
         }
         .showcase-grid {
             display: grid;
@@ -390,6 +414,7 @@
         }
         .media-card {
             padding: 30px;
+            grid-column: span 2; /* Each card takes up 1/3 of the width */
         }
         .media-header { display: flex; align-items: center; gap: 15px; margin-bottom: 1rem; }
         .media-icon {
@@ -402,9 +427,6 @@
         .media-link { font-weight: 600; font-size: 1rem; color: var(--accent-color); }
         .media-link i { margin-left: 5px; transition: transform 0.3s ease; }
         a.impact-card:hover .media-link i { transform: translateX(5px); }
-
-        .media-card.span-3 { grid-column: span 3; }
-        .media-card.span-2 { grid-column: span 2; }
         
 
         /* --- CONTACT SECTION --- */
@@ -444,18 +466,32 @@
                 grid-template-columns: 1fr; gap: 2.5rem; text-align: center;
             }
             #about .about-image { margin: 0 auto; }
-            #about h2, #about .about-text { text-align: center; }
+            #about h2, #about h3, #about .about-text { text-align: center; }
             
             .showcase-grid { grid-template-columns: repeat(2, 1fr); }
-            .featured-item, .testimonial-card, .media-card.span-3, .media-card.span-2 {
+            .featured-item, .testimonial-card {
                  grid-column: span 2;
+            }
+             .media-card {
+                grid-column: span 1;
+            }
+             #services .card-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            #services .card:nth-child(n) { /* Reset spans for tablet */
+                grid-column: span 1;
+            }
+            #services .card:last-child { /* Center the last card if it's alone on a row */
+                grid-column: 1 / -1;
+                width: 50%;
+                justify-self: center;
             }
         }
         
         @media (max-width: 768px) {
             body { padding-top: 70px; }
             section { scroll-margin-top: 70px; }
-            .fullscreen-section, #services { min-height: calc(100vh - 70px); padding: 60px 20px;}
+            .fullscreen-section, #services, #about { padding: 60px 20px;}
             .navbar { height: 70px; padding: 0 20px; }
             .nav-menu {
                 position: fixed; left: -100%; top: 70px;
@@ -480,20 +516,19 @@
             #about .about-image { margin-top: 2rem; }
             
             .showcase-grid { grid-template-columns: 1fr; }
-            .featured-item, .testimonial-card, .media-card.span-3, .media-card.span-2 {
+            .featured-item, .testimonial-card, .media-card {
                  grid-column: span 1;
             }
             .featured-item { min-height: 400px; }
             .featured-item .featured-caption h3 { font-size: 2rem; }
-
-        }
-        
-        @media (min-width: 600px) {
-            #services .card-container { grid-template-columns: repeat(2, 1fr); }
-        }
-        
-        @media (min-width: 1024px) {
-            #services .card-container { grid-template-columns: repeat(4, 1fr); }
+            #services .card-container {
+                grid-template-columns: 1fr;
+            }
+            #services .card:last-child {
+                grid-column: auto;
+                width: auto;
+                justify-self: auto;
+            }
         }
     </style>
 </head>
@@ -532,22 +567,18 @@
             </div>
         </section>
 
-        <section id="about" class="fullscreen-section" data-color="#eaf2ff">
+        <section id="about" data-color="#eaf2ff">
             <div class="container">
                 <div class="about-container">
                     <div class="about-image">
-                        <img src="https://images.pexels.com/photos/4101143/pexels-photo-4101143.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="A professional woman in a modern office environment, representing Zeenia Irani.">
+                        <img src="https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="A professional woman in a modern office environment, representing Zeenia Irani.">
                     </div>
                     <div class="about-text">
                         <h2>About Us</h2>
                         <p>At the ZI Strategy Group, we <strong>help mission-driven organizations turn bold vision into measurable change</strong>. We specialize in organizational transformation—leveraging data-driven strategy and deep sector insight to unlock potential, build capacity, and deliver sustainable impact.</p>
                         <p>Our mission is to empower leaders and teams to scale with clarity, fundraise with confidence, and forge partnerships that accelerate social change. By grounding our work in data, we ensure every decision drives results—and that impact is not just envisioned, but proven.</p>
-                        <h2>The Founder</h2>
+                        <h3>The Founder</h3>
                         <p>Zeenia Irani is a strategic advisor and capital mobilization expert with deep experience across the social impact and tech sectors. As Founder of <strong>ZI Strategy Group</strong>, she helps mission-driven organizations and social enterprises unlock growth, attract transformational funding, and deliver measurable impact.</p>
-                        <p>Zeenia has raised and directed millions in philanthropic and investment capital through leadership roles at FINCA International, Mercy Corps, the United Nations Foundation, and the World Food Programme. She has worked across Latin America, Africa, and South Asia—building cross-sector partnerships and scaling inclusive solutions.</p>
-                        <p>She partners closely with technology companies to bring cutting-edge innovations—such as AI and advanced data platforms—into the nonprofit sector. By bridging the gap between tech and social impact, Zeenia ensures these tools are effective, ethical, inclusive, and tailored to nonprofit realities.</p>
-                        <p>With a strong track record advising global institutions, governments, and Fortune 500 partners, Zeenia drives systems-level change informed by responsible AI and ethical innovation.</p>
-                        <p>She holds an MBA from UC Berkeley’s Haas School of Business, focusing on social innovation and impact investing, and is the co-creator of the Bob Dole Leadership Program for people with disabilities in public service.</p>
                     </div>
                 </div>
             </div>
@@ -586,7 +617,7 @@
                         </div>
                         <p>Our tailored coaching and development programs empower executive leaders and emerging talent to navigate challenges, inspire teams, and lead with confidence and vision.</p>
                     </div>
-                    <div class="card">
+                     <div class="card">
                         <div class="card-header">
                             <i class="fas fa-calculator"></i>
                             <h3>Accounting</h3>
@@ -616,7 +647,7 @@
                         <p class="testimonial-text">"Working with Zeenia was a pivotal moment for our organization. Her strategic approach to fundraising not only helped us exceed our annual goal by 40% but also equipped our team with the skills to build sustainable donor relationships for years to come. Her expertise is a game-changer."</p>
                         <p class="testimonial-author">— Maria Rodriguez <span>Executive Director, Global Health Advocates</span></p>
                     </div>
-                    <a href="https://finca.org/leveraging-generative-ai-to-tackle-global-poverty/" target="_blank" class="impact-card media-card span-3">
+                    <a href="https://finca.org/leveraging-generative-ai-to-tackle-global-poverty/" target="_blank" class="impact-card media-card">
                         <div class="media-header">
                             <div class="media-icon"><i class="fa-solid fa-robot"></i></div>
                              <h4>Leveraging Generative AI</h4>
@@ -624,7 +655,7 @@
                         <p class="media-description">A thought leadership piece on how emerging technologies can create innovative solutions for financial inclusion and poverty alleviation.</p>
                         <span class="media-link">Read the Article <i class="fas fa-arrow-right"></i></span>
                     </a>
-                    <a href="https://www.youtube.com/watch?v=wfUpSsrK1ss" target="_blank" class="impact-card media-card span-3">
+                    <a href="https://www.youtube.com/watch?v=wfUpSsrK1ss" target="_blank" class="impact-card media-card">
                         <div class="media-header">
                             <div class="media-icon"><i class="fa-brands fa-aws"></i></div>
                             <h4>AWS Tech Skills for Social Impact</h4>
@@ -632,7 +663,15 @@
                         <p class="media-description">A discussion on building scalable and accessible tech skills programs for the nonprofit workforce, hosted by AWS.</p>
                         <span class="media-link">Watch on YouTube <i class="fas fa-arrow-right"></i></span>
                     </a>
-                    <a href="https://www.youtube.com/watch?v=F6Bqhgum1HI" target="_blank" class="impact-card media-card span-2">
+                     <a href="https://philanthropy.zoom.us/rec/play/K3S7Nfvjf32akBnI1gceptFXUsfoXSVDM5dQdaKRGJqgq3aqeG-_LPpBADbDv-UJZi_1rZXK0cnDApY.JOz2gZYrr_V9IQu7?eagerLoadZvaPages=sidemenu.billing.plan_management&accessLevel=meeting&canPlayFromShare=true&from=share_recording_detail&startTime=1753293602000&componentName=rec-play" target="_blank" class="impact-card media-card">
+                        <div class="media-header">
+                            <div class="media-icon"><i class="fa-solid fa-newspaper"></i></div>
+                            <h4>Chronicle of Philanthropy</h4>
+                        </div>
+                        <p class="media-description">An interview with the Chronicle of Philanthropy where Zeenia discusses the ethical application of AI and strategies for responsible innovation in the nonprofit sector.</p>
+                        <span class="media-link">Watch the Interview <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=F6Bqhgum1HI" target="_blank" class="impact-card media-card">
                          <div class="media-header">
                             <div class="media-icon"><i class="fa-brands fa-youtube"></i></div>
                             <h4>Dean's Speaker Series</h4>
@@ -640,7 +679,7 @@
                         <p class="media-description">Listen to Zeenia's journey and insights on driving social change, shared with the next generation of leaders at UC Berkeley.</p>
                         <span class="media-link">Watch the Talk <i class="fas fa-arrow-right"></i></span>
                     </a>
-                    <a href="https://podcasts.apple.com/us/podcast/zeenia-irani-ewmba-23-a-global-journey-to-haas/id1506314689?i=1000513696600" target="_blank" class="impact-card media-card span-2">
+                    <a href="https://podcasts.apple.com/us/podcast/zeenia-irani-ewmba-23-a-global-journey-to-haas/id1506314689?i=1000513696600" target="_blank" class="impact-card media-card">
                          <div class="media-header">
                             <div class="media-icon"><i class="fa-solid fa-podcast"></i></div>
                             <h4>OneHaas Podcast</h4>
@@ -648,7 +687,7 @@
                         <p class="media-description">Zeenia shares her personal story and the pivotal moments that shaped her career in social impact.</p>
                         <span class="media-link">Listen on Apple Podcasts <i class="fas fa-arrow-right"></i></span>
                     </a>
-                    <a href="https://soundcloud.com/user-486346131/behind-the-lens-with-wfp-usas-zeenia-irani-how-you-can-make-a-difference" target="_blank" class="impact-card media-card span-2">
+                    <a href="https://soundcloud.com/user-486346131/behind-the-lens-with-wfp-usas-zeenia-irani-how-you-can-make-a-difference" target="_blank" class="impact-card media-card">
                         <div class="media-header">
                            <div class="media-icon"><i class="fa-brands fa-soundcloud"></i></div>
                            <h4>Behind the Lens Podcast</h4>
