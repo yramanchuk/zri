@@ -237,12 +237,11 @@
         #about .about-container {
             display: grid;
             grid-template-columns: 1fr 2.5fr; /* Adjusted for better balance */
-            align-items: center;
             gap: 5rem;
         }
 
         #about .about-image img {
-            margin-left: -20px;  
+            margin-left: 20px;  
             margin-top: 120px;  
             width: 100%;
             height: 100%;
@@ -352,7 +351,7 @@
         }
         .showcase-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(6, 1fr);
             gap: 2rem;
         }
         .impact-card {
@@ -372,7 +371,7 @@
              border-color: var(--accent-color);
         }
         .featured-item {
-            grid-column: span 3;
+            grid-column: span 6;
             position: relative;
             min-height: 480px;
             box-shadow: 0 10px 30px -10px rgba(45, 55, 72, 0.3);
@@ -402,7 +401,7 @@
             font-size: 1.2rem; opacity: 0.9; max-width: 600px; color: white;
         }
         .testimonial-card {
-            grid-column: span 3;
+            grid-column: span 6;
             padding: 40px;
             text-align: center;
         }
@@ -416,7 +415,7 @@
         }
         .media-card {
             padding: 30px;
-            grid-column: span 1;
+            grid-column: span 2; /* Each card takes up 1/3 of the width */
         }
         .media-header { display: flex; align-items: center; gap: 15px; margin-bottom: 1rem; }
         .media-icon {
@@ -573,7 +572,7 @@
             <div class="container">
                 <div class="about-container">
                     <div class="about-image">
-                        <img src="https://yramanchuk.github.io/zri/about.jpg" alt="A professional woman in a modern office environment, representing Zeenia Irani.">
+                        <img src="about.jpg" alt="A professional woman in a modern office environment, representing Zeenia Irani.">
                     </div>
                     <div class="about-text">
                         <h2>About Us</h2>
@@ -643,7 +642,7 @@
                 <p class="section-subtitle">Driving results for our partners and sharing insights on the global stage.</p>
                 <div class="showcase-grid">
                     <a href="https://aws.amazon.com/government-education/nonprofits/imagine-nonprofit/" target="_blank" class="impact-card featured-item">
-                        <img src="https://yramanchuk.github.io/zri/impact.jpg" alt="Zeenia Irani speaking at the AWS Imagine Nonprofit conference.">
+                        <img src="impact.jpg" alt="Zeenia Irani speaking at the AWS Imagine Nonprofit conference.">
                         <div class="featured-caption">
                             <h3>Sharing Insights at AWS IMAGINE</h3>
                             <p>Discussing the future of nonprofit technology and strategy.</p>
@@ -800,4 +799,3 @@
     </script>
 </body>
 </html>
-
