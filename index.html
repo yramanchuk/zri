@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZRI Strategies | Strategic Fundraising & Leadership</title>
-    <meta name="description" content="ZRI Strategies empowers social impact organizations to scale, innovate, and lead meaningful change through strategic fundraising, leadership development, and transformative partnerships.">
+    <title>ZI Strategies | Strategic Fundraising & Leadership</title>
+    <meta name="description" content="ZI Strategies empowers social impact organizations to scale, innovate, and lead meaningful change through strategic fundraising, leadership development, and transformative partnerships.">
     
     <!-- Google Fonts: Poppins for headings, Source Sans Pro for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -237,6 +237,7 @@
         #about .about-container {
             display: grid;
             grid-template-columns: 1fr 2.5fr; /* Adjusted for better balance */
+            # align-items: center;
             gap: 5rem;
         }
 
@@ -351,7 +352,7 @@
         }
         .showcase-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
         .impact-card {
@@ -371,7 +372,7 @@
              border-color: var(--accent-color);
         }
         .featured-item {
-            grid-column: span 6;
+            grid-column: span 3;
             position: relative;
             min-height: 480px;
             box-shadow: 0 10px 30px -10px rgba(45, 55, 72, 0.3);
@@ -400,22 +401,10 @@
         .featured-item .featured-caption p {
             font-size: 1.2rem; opacity: 0.9; max-width: 600px; color: white;
         }
-        .testimonial-card {
-            grid-column: span 6;
-            padding: 40px;
-            text-align: center;
-        }
-        .testimonial-text {
-            font-style: italic; color: #4a5568; margin: 0 auto 1.5rem auto;
-            font-size: 1.25rem; line-height: 1.7; max-width: 800px;
-        }
-        .testimonial-author { font-weight: 600; }
-        .testimonial-author span {
-            display: block; font-weight: 400; font-size: 1rem; color: #718096; margin-top: 4px;
-        }
+        
         .media-card {
             padding: 30px;
-            grid-column: span 2; /* Each card takes up 1/3 of the width */
+            grid-column: span 1;
         }
         .media-header { display: flex; align-items: center; gap: 15px; margin-bottom: 1rem; }
         .media-icon {
@@ -429,6 +418,126 @@
         .media-link i { margin-left: 5px; transition: transform 0.3s ease; }
         a.impact-card:hover .media-link i { transform: translateX(5px); }
         
+        /* --- Testimonial Slider --- */
+        .testimonial-container {
+            grid-column: span 3;
+            max-width: 850px;
+            width: 100%;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px 60px; /* Compact padding */
+            box-sizing: border-box;
+            position: relative;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            margin: 0 auto;
+            transition: min-height 0.5s ease-in-out;
+        }
+
+        .testimonial-slides-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .testimonial-slide {
+            display: none;
+            text-align: center;
+            animation: fadeEffect 1.5s;
+        }
+
+        @keyframes fadeEffect {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #4a5568;
+            margin: 0 auto 1.5rem auto;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            font-family: var(--heading-font);
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color 0.3s;
+        }
+
+        .testimonial-author a:hover {
+            color: var(--accent-hover-color);
+        }
+
+        .testimonial-author span {
+            display: block;
+            font-weight: 400;
+            font-size: 1rem;
+            color: #718096;
+            margin-top: 6px;
+            font-family: var(--body-font);
+            font-style: normal;
+        }
+        
+        .testimonial-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: calc(100% + 40px);
+            left: -20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 10;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--primary-text-color);
+            font-size: 18px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+        
+        .dots-container {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: #d1d5db;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .dot.active, .dot:hover {
+            background-color: var(--accent-color);
+        }
 
         /* --- CONTACT SECTION --- */
         #contact .container { text-align: center; }
@@ -470,7 +579,7 @@
             #about h2, #about h3, #about .about-text { text-align: center; }
             
             .showcase-grid { grid-template-columns: repeat(2, 1fr); }
-            .featured-item, .testimonial-card {
+            .featured-item, .testimonial-container {
                  grid-column: span 2;
             }
              .media-card {
@@ -517,7 +626,7 @@
             #about .about-image { margin-top: 2rem; }
             
             .showcase-grid { grid-template-columns: 1fr; }
-            .featured-item, .testimonial-card, .media-card {
+            .featured-item, .testimonial-container, .media-card {
                  grid-column: span 1;
             }
             .featured-item { min-height: 400px; }
@@ -537,7 +646,7 @@
 
     <header>
         <nav class="navbar">
-            <a href="#hero" class="nav-logo">ZRI STRATEGIES</a>
+            <a href="#hero" class="nav-logo">ZI Strategies</a>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
@@ -562,8 +671,8 @@
                 <div class="parallax-shape shape4" data-speed="-5"></div>
             </div>
             <div class="hero-content" id="hero-scroll-text">
-                <h1>From Vision to Impact</h1>
-                <p class="subtitle">Strategic guidance for organizations ready to lead, grow, and leave a lasting impact.</p>
+                <h1>From Vision to Lasting Impact</h1>
+                <p class="subtitle">Strategic guidance for organizations ready to lead, innovate, and create a lasting, positive societal change.</p>
                 <a href="#services" class="cta-button">Explore Our Services</a>
             </div>
         </section>
@@ -576,10 +685,10 @@
                     </div>
                     <div class="about-text">
                         <h2>About Us</h2>
-                        <p>At ZI Strategy Group, we team up with organizations that are passionate about their mission. We help them turn their big dreams into real, measurable progress. We're all about organizational transformation – using smart data and our deep understanding of different sectors to help you reach your full potential, build your strengths, and make a lasting difference.</p>
+                        <p>At ZI Strategies, we team up with organizations that are passionate about their mission. We help them turn their big dreams into real, measurable progress. We're all about organizational transformation – using smart data and our deep understanding of different sectors to help you reach your full potential, build your strengths, and make a lasting difference.</p>
                         <p>Our goal is to give organizations the clear strategy they need to grow, the confidence to secure important funding, the knack for creating powerful partnerships that accelerate positive change, and the know-how to manage their finances effectively. We back all our advice with solid data, so every strategic move you make consistently delivers real results – turning those great ideas into undeniable successes.</p>
                         <h3>The Founder</h3>
-                        <p>Zeenia Irani, founder of ZI Strategy Group, is a strategic advisor specializing in capital mobilization. She helps social impact and tech organizations secure funding and achieve measurable impact.</p>
+                        <p>Zeenia Irani, founder of ZI Strategies, is a strategic advisor specializing in capital mobilization. She helps social impact and tech organizations secure funding and achieve measurable impact.</p>
                         <p>Zeenia has raised and directed millions in philanthropic and investment capital through leadership roles at FINCA International, Mercy Corps, the United Nations Foundation, and the World Food Programme. Her work across Latin America, Africa, and South Asia has built partnerships and scaled inclusive solutions.</p>
                         <p>She integrates AI and advanced data platforms into the nonprofit sector, bridging tech and social impact to develop effective, ethical, and inclusive tools.</p>
                         <p>Zeenia advises global institutions, governments, and Fortune 500 partners, driving systems-level change grounded in responsible AI and ethical innovation.</p>
@@ -592,28 +701,28 @@
         <section id="services" data-color="#fff0f5">
              <div class="container">
                 <h2>Our Services</h2>
-                <p class="section-subtitle">At ZI Strategy Group, we provide tailored advisory services designed to help mission-driven organizations grow, lead, and achieve lasting impact. Our expertise spans strategic fundraising, cross-sector partnerships, leadership development, accounting, data analytics, and communication strategies—each customized to meet your unique goals and challenges.</p>
+                <p class="section-subtitle">At ZI Strategies, we offer bespoke advisory services tailored to empower mission-driven organizations. We guide you in achieving sustainable growth, exemplary leadership, and profound, lasting impact. Our comprehensive expertise encompasses strategic fundraising, cultivating cross-sector partnerships, fostering leadership development, precise accounting, insightful data analytics, and impactful communication strategies. Each service is meticulously crafted to address your distinctive goals and challenges.</p>
                 <div class="card-container">
                     <div class="card">
                         <div class="card-header">
                             <i class="fas fa-hand-holding-dollar"></i>
                             <h3>Strategic Fundraising</h3>
                         </div>
-                        <p>We offer expert guidance to diversify revenue sources and cultivate lasting, meaningful donor relationships that fuel sustainable growth.</p>
+                        <p>We offer expert guidance to diversify revenue streams and cultivate lasting donor relationships, fueling sustainable growth.</p>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <i class="fas fa-handshake"></i>
                             <h3>Corporate Engagement</h3>
                         </div>
-                        <p>We advise and train organizations to build authentic, strategic partnerships with corporations—creating mutual value through aligned goals and impactful workplace giving programs.</p>
+                        <p>We empower organizations to forge authentic, strategic alliances with corporations, generating exponential mutual value through deeply aligned objectives and high-impact workplace giving initiatives.</p>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <i class="fas fa-feather-alt"></i>
                             <h3>Communications</h3>
                         </div>
-                        <p>We craft compelling narratives and targeted messaging that elevate your mission, engage stakeholders, and inspire action across diverse channels.</p>
+                        <p>We architect powerful narratives and strategic messaging that amplify your mission, galvanize stakeholders, and drive decisive action across all channels.</p>
                     </div>
                     <div class="card">
                         <div class="card-header">
@@ -648,10 +757,50 @@
                             <p>Discussing the future of nonprofit technology and strategy.</p>
                         </div>
                     </a>
-                    <div class="impact-card testimonial-card">
-                        <p class="testimonial-text">"Working with Zeenia was a pivotal moment for our organization. Her strategic approach to fundraising not only helped us exceed our annual goal by 40% but also equipped our team with the skills to build sustainable donor relationships for years to come. Her expertise is a game-changer."</p>
-                        <p class="testimonial-author">— Maria Rodriguez <span>Executive Director, Global Health Advocates</span></p>
+                    
+                    <div class="testimonial-container">
+                        <div class="testimonial-slides-wrapper">
+                            <!-- Testimonial Slides -->
+                            <div class="testimonial-slide">
+                                <p class="testimonial-text">"I've had the honor of knowing and working with Zeenia for over 12 years. Her commitment to every issue she has worked on... Zeenia leads by example through an unwavering work-ethic and a heartfelt passion for achieving the greatest good for the greatest number of people. Zeenia is someone I recommend without hesitation..."</p>
+                                <p class="testimonial-author">
+                                    <a href="https://www.midaassociates.org/" target="_blank">Jason Mida</a>
+                                    <span>President, Mida Associates</span>
+                                </p>
+                            </div>
+                    
+                            <div class="testimonial-slide">
+                                <p class="testimonial-text">"Zeenia helped me, as the CEO of 2GI, craft a comprehensive two-year development work plan to ensure we met our fundraising targets. Her strategic guidance has been invaluable. As a Board member for 2GI, she has consistently helped us think critically and creatively about our fundraising approach."</p>
+                                <p class="testimonial-author">
+                                    <a href="http://2gether-international.org/" target="_blank">Diego Mariscal</a>
+                                    <span>Founder & CEO, 2Gether-International</span>
+                                </p>
+                            </div>
+                    
+                            <div class="testimonial-slide">
+                                <p class="testimonial-text">"Zeenia Irani is a rare leader who brings clarity to complexity across strategy, finance, business planning, and emerging tech. She’s not only a sharp thinker and steady operator — she’s a true partner. A generous listener, a thoughtful team leader, and someone whose multicultural mindset brings out the best in everyone she works with. Every collaboration with her leaves you smarter — and more energized."</p>
+                                <p class="testimonial-author">
+                                    <a href="https://www.aidataanalytics.network/events-responsible-ai-summit-na/speakers/megan-bentley" target="_blank">Megan Bentley</a>
+                                    <span>Named “100 Brilliant Women in AI Ethics 2025”</span>
+                                </p>
+                            </div>
+                        </div>
+                
+                        <!-- Navigation Arrows -->
+                        <div class="testimonial-nav">
+                            <a class="prev">&#10094;</a>
+                            <a class="next">&#10095;</a>
+                        </div>
+                
+                        <!-- Navigation Dots -->
+                        <div class="dots-container">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                
                     </div>
+
                     <a href="https://finca.org/leveraging-generative-ai-to-tackle-global-poverty/" target="_blank" class="impact-card media-card">
                         <div class="media-header">
                             <div class="media-icon"><i class="fa-solid fa-robot"></i></div>
@@ -709,18 +858,18 @@
                 <h2>Let's Connect</h2>
                 <p class="section-subtitle">Ready to drive transformative growth? Reach out to discuss how we can partner.</p>
                 <div class="contact-info">
-                    <a href="mailto:zristrategies@gmail.com" class="contact-button"><i class="fas fa-envelope"></i> zristrategies@gmail.com</a>
+                    <a href="mailto:zeenia@zistrategies.com" class="contact-button"><i class="fas fa-envelope"></i> zeenia@zistrategies.com</a>
                     <a href="tel:1-818-333-6021" class="contact-button"><i class="fas fa-phone"></i> (818) 333-6021</a>
                 </div>
                 <div class="social-links">
-                    <a href="#" aria-label="LinkedIn Profile" title="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.linkedin.com/in/zeenia-irani-6b380131/" aria-label="LinkedIn Profile" title="LinkedIn Profile" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 ZRI Strategies. All Rights Reserved.</p>
+        <p>&copy; 2024 ZI Strategies. All Rights Reserved.</p>
     </footer>
 
     <script>
@@ -794,6 +943,91 @@
             sections.forEach(section => {
                 observer.observe(section);
             });
+
+            // --- Testimonial Slider ---
+            let slideIndex = 1;
+            let slideInterval;
+            const slides = document.querySelectorAll(".testimonial-slide");
+            const dots = document.querySelectorAll(".dot");
+            const slidesWrapper = document.querySelector(".testimonial-slides-wrapper");
+
+            function setContainerHeight() {
+                if (!slidesWrapper) return;
+                let maxHeight = 0;
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].style.position = 'absolute';
+                    slides[i].style.visibility = 'hidden';
+                    slides[i].style.display = 'block';
+                    
+                    if (slides[i].offsetHeight > maxHeight) {
+                        maxHeight = slides[i].offsetHeight;
+                    }
+                    
+                    slides[i].style.position = '';
+                    slides[i].style.visibility = '';
+                    slides[i].style.display = 'none';
+                }
+                slidesWrapper.style.minHeight = maxHeight + 'px';
+            }
+
+            function showSlides(n) {
+                if (slides.length === 0) return;
+
+                if (n > slides.length) { slideIndex = 1 }
+                if (n < 1) { slideIndex = slides.length }
+
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+
+                for (let i = 0; i < dots.length; i++) {
+                    dots[i].classList.remove("active");
+                }
+
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].classList.add("active");
+            }
+
+            function plusSlides(n) {
+                showSlides(slideIndex += n);
+                resetInterval();
+            }
+
+            function currentSlide(n) {
+                showSlides(slideIndex = n);
+                resetInterval();
+            }
+
+            function startSlideshow() {
+                slideInterval = setInterval(() => {
+                    plusSlides(1);
+                }, 8000);
+            }
+
+            function resetInterval() {
+                clearInterval(slideInterval);
+                startSlideshow();
+            }
+
+            // Setup listeners
+            const prevButton = document.querySelector('.testimonial-nav .prev');
+            const nextButton = document.querySelector('.testimonial-nav .next');
+            
+            if (prevButton) {
+                prevButton.addEventListener('click', () => plusSlides(-1));
+            }
+            if (nextButton) {
+                nextButton.addEventListener('click', () => plusSlides(1));
+            }
+            
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => currentSlide(index + 1));
+            });
+            
+            setContainerHeight();
+            showSlides(slideIndex);
+            startSlideshow();
+            window.addEventListener('resize', setContainerHeight);
         });
 
     </script>
